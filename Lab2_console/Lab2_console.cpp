@@ -102,6 +102,7 @@ int main()
     save2.flush();
 
     //serving tasks
+    std::vector<OSEmulate::Task*> inProcess;
     //find first
     auto it = chain.begin();
     for (it; it != chain.end(); it++)
@@ -109,8 +110,39 @@ int main()
         if (it->second.getParents()->empty())
             break;
     }
-    it->second.Funcb3(Rand1, Rand2, Rand3);
+    inProcess.push_back(&it->second);
 
+    for (int tasksInChain = 0; tasksInChain < chain.size(); tasksInChain++)
+    {
+        //do inProcess
+        for (int tasksInProcess = 0; tasksInProcess < inProcess.size(); tasksInProcess++)
+        {
+            if (inProcess[tasksInProcess]->getFunc3() == NULL)
+            {
+                //make thread
+                inProcess[tasksInProcess]->Funcb1(Rand1);
+            }
+            else
+            {
+                //make thread
+                inProcess[tasksInProcess]->Funcb3(Rand1, Rand2, Rand3);
+            }
+        }
+        //if child of all is ==
+
+
+        //if not
+            //if multiple end
+            //if chain
+
+        //inProcess.clear();
+        for (int parents = 0; parents < it->second.getParents()->size(); parents++)
+        {
+            inProcess.push_back((*it->second.getParents())[parents]);
+        }
+
+
+    }
 
     return 0;
 }

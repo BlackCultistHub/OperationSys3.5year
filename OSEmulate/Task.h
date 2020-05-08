@@ -44,6 +44,8 @@ namespace OSEmulate {
         //static T (*func)(Args...args);
         bool Funcb1(bool& arg1) { return funcb1(arg1); }
         bool Funcb3(bool& arg1, bool& arg2, bool& arg3) { return funcb3(arg1, arg2, arg3); }
+        std::function<bool(bool&)> getFunc1() { return funcb1; }
+        std::function<bool(bool&, bool&, bool&)> getFunc3() { return funcb3; }
 
         //service
         bool containsParent(Task* parent);
